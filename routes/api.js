@@ -8,7 +8,7 @@ var authenticate = require('../helpers/AuthenticateHelper');
 // ---------------------------------------------------------
 // http://localhost:8080/api/authenticate
 router.post('/authenticate', function (req, res) {
-    // check login here
+    // check login here   
     authenticate.login(req, res);
 });
 

@@ -41,13 +41,15 @@ AuthenticateHelper.check = function (req, res, next) {
 
 
 AuthenticateHelper.login = function (req, res) {
-
-    var name = req.body.name;
-    var password = req.body.password;
+    var data = req.body;
+    var username = data.username;
+    var password = data.password;
     var query = {
-        name: name,
+        username: username,
         password: password
     }
+
+    //console.log(query);
 
     db.findDocuments(query, 'users', function (result) {
         console.log(result);
@@ -55,7 +57,7 @@ AuthenticateHelper.login = function (req, res) {
         if (result.length > 0) {
             // create a token
             var payload = {
-                name: name,
+                username: username,
                 password: password
             }
             var token = jwt.sign(payload, secrect, {
