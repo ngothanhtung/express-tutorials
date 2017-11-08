@@ -28,7 +28,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Add headers
 // use it before all route definitions
-app.use(cors({origin: 'http://localhost:3001'}));
+var whitelist = ['http://localhost:3000', 'http://localhost:3001'];
+var corsOptions = {
+    origin: function (origin, callback) {
+        if (whitelist.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    }
+}
+//app.use(cors(corsOptions));
+app.use(cors());
 
 app.use('/', index);
 app.use('/api', api);

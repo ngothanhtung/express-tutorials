@@ -1,12 +1,11 @@
 var express = require('express');
 var router = express.Router();
-    
+var db = require('../helpers/MongoDbHelper');
 var authenticate = require('../helpers/AuthenticateHelper');
 
 // ---------------------------------------------------------
 // authentication (no middleware necessary since this isnt authenticated)
 // ---------------------------------------------------------
-// http://localhost:8080/api/authenticate
 router.post('/authenticate', function (req, res) {
     // check login here   
     authenticate.login(req, res);
