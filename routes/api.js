@@ -27,7 +27,12 @@ router.get('/', function (req, res) {
 
 router.get('/users', function (req, res) {
     db.findDocuments({}, "users", function(result) {
-        res.json(result);
+        res.json({
+            success: true,
+            message: "OK",
+            token: "",
+            data: result
+        });
     })  
 });
 

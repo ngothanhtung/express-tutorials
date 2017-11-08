@@ -34,7 +34,9 @@ AuthenticateHelper.check = function (req, res, next) {
         // return an error
         return res.status(403).send({
             success: false,
-            message: 'No token provided.'
+            message: 'No token provided.',
+            token: "",
+            data: {}      
         });
     }
 };
@@ -67,10 +69,18 @@ AuthenticateHelper.login = function (req, res) {
             res.json({
                 success: true,
                 message: 'Token was created',
-                token: token
+                token: token,
+                data: {}
             });
         } else {
-            res.json({ message: "Failed to authenticate token." });
+            res.json(
+                { 
+                    success: false,
+                    message: "Failed to authenticate token.",
+                    token: "",
+                    data: {}
+                }
+            );
         }
     });
 }
