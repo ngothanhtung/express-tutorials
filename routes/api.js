@@ -36,6 +36,18 @@ router.get('/users', function (req, res) {
     })  
 });
 
+
+router.get('/products', function (req, res) {
+    db.findDocuments({}, "products", function(result) {
+        res.json({
+            success: true,
+            message: "OK",
+            token: "",
+            data: result
+        });
+    })  
+});
+
 router.get('/check', function (req, res) {
     res.json(req.decoded);
 });
