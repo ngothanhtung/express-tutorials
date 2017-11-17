@@ -13,13 +13,6 @@ router.post('/authenticate', function (req, res) {
     authenticate.login(req, res);
 });
 
-router.post('/product', function (req, res) {
-    var data = req.body;
-    var check = validator.isEmail('tungnt$softech.vn');
-    console.log(check);
-    res.send("OK");
-});
-
 // ---------------------------------------------------------
 // route middleware to authenticate and check token
 // ---------------------------------------------------------
@@ -59,7 +52,17 @@ router.get('/products', function (req, res) {
     })
 });
 
-
+router.get('/product/:id', function (req, res) {
+    db.findDocument(req.params.id, "products", function (result) {
+        console.log(result);
+        res.json({
+            success: true,
+            message: "OK",
+            token: "",
+            data: result
+        });
+    })
+});
 
 router.get('/check', function (req, res) {
     res.json(req.decoded);

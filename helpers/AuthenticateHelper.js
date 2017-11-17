@@ -36,7 +36,7 @@ AuthenticateHelper.check = function (req, res, next) {
             success: false,
             message: 'No token provided.',
             token: "",
-            data: {}      
+            data: {}   
         });
     }
 };
