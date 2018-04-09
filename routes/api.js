@@ -16,9 +16,9 @@ router.post('/authenticate', function (req, res) {
 // ---------------------------------------------------------
 // route middleware to authenticate and check token
 // ---------------------------------------------------------
-router.use(function (req, res, next) {
-    authenticate.check(req, res, next);
-});
+// router.use(function (req, res, next) {
+//     authenticate.check(req, res, next);
+// });
 
 // ---------------------------------------------------------
 // authenticated routes
@@ -54,6 +54,21 @@ router.get('/products', function (req, res) {
 
 router.get('/product/:id', function (req, res) {
     db.findDocument(req.params.id, "products", function (result) {
+        console.log(result);
+        res.json({
+            success: true,
+            message: "OK",
+            token: "",
+            data: result
+        });
+    })
+});
+
+
+router.post('/product/', function (req, res) {
+    var data = req.body;
+    console.log(data);
+    db.insertDocument(data, "products", function (result) {
         console.log(result);
         res.json({
             success: true,
