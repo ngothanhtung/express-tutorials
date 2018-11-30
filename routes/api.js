@@ -8,7 +8,7 @@ var validator = require('validator');
 // ---------------------------------------------------------
 // authentication (no middleware necessary since this isnt authenticated)
 // ---------------------------------------------------------
-router.post('/authenticate', function (req, res) {
+router.post('/login', function (req, res) {
     // check login here   
     authenticate.login(req, res);
 });
@@ -16,9 +16,9 @@ router.post('/authenticate', function (req, res) {
 // ---------------------------------------------------------
 // route middleware to authenticate and check token
 // ---------------------------------------------------------
-// router.use(function (req, res, next) {
-//     authenticate.check(req, res, next);
-// });
+router.use(function (req, res, next) {
+    authenticate.check(req, res, next);
+});
 
 // ---------------------------------------------------------
 // authenticated routes
